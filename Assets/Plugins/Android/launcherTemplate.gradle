@@ -1,0 +1,127 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    implementation project(':unityLibrary')
+}
+
+android {
+	namespace "**NAMESPACE**"
+    ndkPath "**NDKPATH**"
+
+    compileSdkVersion **APIVERSION**
+    buildToolsVersion '**BUILDTOOLS**'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        minSdkVersion **MINSDKVERSION**
+        targetSdkVersion **TARGETSDKVERSION**
+        applicationId '**APPLICATIONID**'
+        ndk {
+            abiFilters **ABIFILTERS**
+        }
+        versionCode **VERSIONCODE**
+        versionName '**VERSIONNAME**'
+    }
+
+    aaptOptions {
+        noCompress = ['.unity3d', '.ress', '.resource', '.obb', '.bundle', '.unityexp'] + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // Fallback debug signing: needed because Unity replaces **SIGN** with
+    // empty string when no custom keystore is configured, resulting in an
+    // unsigned APK that Unity cannot find.
+    signingConfigs {
+        release {
+            storeFile file(System.getProperty("user.home") + "/.android/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            **SIGN**
+            jniDebuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            signingConfig signingConfigs.release
+        }
+    }
+
+    packagingOptions {
+        doNotStrip '*/arm64-v8a/*.so'
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+}
+
+// Patch merged manifest: Unity VR template forces hardwareAccelerated=false
+// which breaks GPU surface creation on PICO OpenXR devices.
+// Patching the merged manifest AFTER Gradle merges it is the only way to
+// override unityLibrary's value, since tools:replace on the app manifest
+// cannot override attributes from library manifests in AGP 7.x.
+ext.patchManifest = { variantName ->
+    def manifestFile = file("${buildDir}/intermediates/merged_manifest/${variantName}/AndroidManifest.xml")
+    if (!manifestFile.exists()) {
+        println "[CustomBuild] Manifest not found at ${manifestFile}, skipping patch for ${variantName}"
+        return
+    }
+    def text = manifestFile.getText('UTF-8')
+    boolean changed = false
+    if (text.contains('android:hardwareAccelerated="false"')) {
+        text = text.replace('android:hardwareAccelerated="false"', 'android:hardwareAccelerated="true"')
+        changed = true
+    }
+    if (text.contains('android:screenOrientation="fullUser"')) {
+        text = text.replace('android:screenOrientation="fullUser"', 'android:screenOrientation="landscape"')
+        changed = true
+    }
+    if (changed) {
+        manifestFile.write(text, 'UTF-8')
+        println "[CustomBuild] Patched ${variantName} manifest: hardwareAccelerated=true, screenOrientation=landscape"
+    } else {
+        println "[CustomBuild] ${variantName} manifest already correct"
+    }
+}
+
+afterEvaluate {
+    try {
+        // Release build
+        tasks.matching { it.name == 'processReleaseManifest' }.configureEach { task ->
+            task.doLast { patchManifest('release') }
+        }
+        // Debug build
+        tasks.matching { it.name == 'processDebugManifest' }.configureEach { task ->
+            task.doLast { patchManifest('debug') }
+        }
+    } catch (Exception e) {
+        println "[CustomBuild] Warning: Could not register manifest patch: ${e.message}"
+    }
+}

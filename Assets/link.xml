@@ -1,0 +1,4 @@
+<linker>
+    <!-- 保留整个项目程序集，防止 IL2CPP managed code stripping 剥离 [RuntimeInitializeOnLoadMethod] 初始化链 -->
+    <assembly fullname="Assembly-CSharp" preserve="all"/>
+</linker>

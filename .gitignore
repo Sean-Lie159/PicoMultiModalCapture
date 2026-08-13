@@ -1,0 +1,58 @@
+# ---- Unity ----
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Ee]xport/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# ---- Build output ----
+*.apk
+*.aab
+*.unitypackage
+
+# ---- PICO SDK (依赖从官方 GitHub 拉取，本仓库不内嵌) ----
+Packages/com.unity.xr.openxr.picoxr/
+Assets/PICO*/
+Packages/com.picoxr*/
+
+# ---- 敏感 / 本地环境 ----
+# 个人录制数据（含场景隐私）
+/video/
+/tmp_*/
+*.mp4
+*.ply
+
+# ---- IDE ----
+.vscode/
+.idea/
+*.swp
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ---- Logs ----
+*.log
+
+# ---- 其他 ----
+node_modules/
+__pycache__/
+*.pyc

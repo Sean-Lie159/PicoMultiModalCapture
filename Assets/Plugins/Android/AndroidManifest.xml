@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          android:installLocation="auto">
+
+    <!-- 相机与存储权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="com.pvr.tobactivate.permission.AUTH_CHECK" />
+    <uses-permission android:name="com.picovr.permission.HAND_TRACKING" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+                     android:maxSdkVersion="28"
+                     tools:replace="android:maxSdkVersion" />
+
+    <!-- MediaProjection 屏幕捕获（Android 10+ 前台服务权限，Android 13+ 通知权限） -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 硬件特性 -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false" />
+
+    <!-- 移除 Unity 自动生成的 Vulkan 功能声明（PICO 使用 OpenGL ES） -->
+    <uses-feature android:name="android.hardware.vulkan.version" tools:node="remove" />
+    <uses-feature android:name="android.hardware.vulkan.level" tools:node="remove" />
+    <uses-feature android:name="android.hardware.vr.headtracking" tools:node="remove" />
+
+    <application>
+        <!-- PICO OpenXR/XRSDK 核心声明 -->
+        <meta-data android:name="pvr.app.type" android:value="vr" />
+        <meta-data android:name="use.pxr.sdk" android:value="1" />
+        <meta-data android:name="rendering_mode" android:value="0" />
+        <meta-data android:name="color_Space" android:value="1" />
+        <meta-data android:name="handtracking" android:value="1" />
+        <meta-data android:name="pvr.app.secure_mr" android:value="0" />
+
+        <activity android:name="com.DefaultCompany.PicoMultiModalCapture.VolumeKeyActivity"
+                  android:theme="@style/UnityThemeSelector"
+                  android:exported="true"
+                  android:excludeFromRecents="true"
+                  android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale|layoutDirection|density"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="landscape"
+                  android:resizeableActivity="true"
+                  android:hardwareAccelerated="true"
+                  tools:replace="android:hardwareAccelerated,android:resizeableActivity,android:screenOrientation,android:excludeFromRecents">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.picoxr.intent.category.PICOXR" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+        </activity>
+
+        <!-- MediaProjection 屏幕捕获前台服务（Android 14+ 必须） -->
+        <service android:name="com.DefaultCompany.PicoMultiModalCapture.MediaProjectionService"
+                 android:foregroundServiceType="mediaProjection"
+                 android:exported="false"
+                 android:stopWithTask="false" />
+    </application>
+</manifest>
