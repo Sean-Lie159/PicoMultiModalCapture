@@ -1,0 +1,38 @@
+{
+  "scopedRegistries": [
+    {
+      "name": "Unity CN",
+      "url": "https://packages.unity.cn",
+      "scopes": [
+        "com.unity.xr.core-utils",
+        "com.unity.xr.hands",
+        "com.unity.xr.legacyinputhelpers",
+        "com.unity.xr.management",
+        "com.unity.xr.openxr",
+        "com.unity.inputsystem",
+        "com.unity.mathematics"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.unity.ugui": "1.0.0",
+    "com.unity.xr.hands": "1.4.0",
+    "com.unity.xr.management": "4.6.0",
+    "com.unity.xr.openxr": "1.10.0",
+    "com.unity.xr.openxr.picoxr": "https://github.com/Pico-Developer/PICO-Unity-OpenXR-SDK.git",
+    "com.unity.modules.androidjni": "1.0.0",
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.physics": "1.0.0",
+    "com.unity.modules.screencapture": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0",
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.modules.unitywebrequesttexture": "1.0.0",
+    "com.unity.modules.vr": "1.0.0",
+    "com.unity.modules.xr": "1.0.0"
+  }
+}
