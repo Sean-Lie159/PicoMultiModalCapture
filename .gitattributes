@@ -1,0 +1,87 @@
+# ============================================================
+# .gitattributes — 统一 line endings 与二进制标记
+# 适用：Unity C# 工程 + tools/ 下的 Python 处理管线
+# ============================================================
+
+# 文本类统一为 LF（checkout 时按平台转换，存储为 LF）
+* text=auto
+
+# --- 源码：统一 LF ---
+*.cs          text eol=lf
+*.java        text eol=lf
+*.py          text eol=lf
+*.ps1         text eol=lf
+*.sh          text eol=lf
+*.json        text eol=lf
+*.xml         text eol=lf
+*.txt         text eol=lf
+*.md          text eol=lf
+*.asmdef      text eol=lf
+*.asmref      text eol=lf
+*.gradle      text eol=lf
+*.props       text eol=lf
+*.targets     text eol=lf
+*.yml         text eol=lf
+*.yaml        text eol=lf
+*.cfg         text eol=lf
+*.uss         text eol=lf
+*.uxml        text eol=lf
+*.unity       text eol=lf
+*.asset       text eol=lf
+*.prefab      text eol=lf
+*.mat         text eol=lf
+*.controller  text eol=lf
+*.anim        text eol=lf
+*.meta        text eol=lf
+*.shader      text eol=lf
+*.compute     text eol=lf
+*.hlsl        text eol=lf
+*.cginc       text eol=lf
+*.compute     text eol=lf
+
+# --- Python 缓存/产物：直接标记 binary（不参与 diff 合并） ---
+*.pyc         binary
+*.pyo         binary
+*.egg-info    binary
+
+# --- Unity 二进制资源 ---
+*.a           binary
+*.aar         binary
+*.jar         binary
+*.so          binary
+*.dll         binary
+*.apk         binary
+*.aab         binary
+*.mp4         binary
+*.mov         binary
+*.avi         binary
+*.png         binary
+*.jpg         binary
+*.jpeg        binary
+*.gif         binary
+*.bmp         binary
+*.tga         binary
+*.psd         binary
+*.exr         binary
+*.hdr         binary
+*.fbx         binary
+*.obj         binary
+*.blend       binary
+*.unitypackage binary
+*.bundle      binary
+*.assetbundle binary
+*.ttf         binary
+*.otf         binary
+*.wav         binary
+*.mp3         binary
+*.ogg         binary
+*.prefs       binary
+*.zip         binary
+*.7z          binary
+*.tar         binary
+*.gz          binary
+*.npy         binary
+*.ply         binary
+
+# --- 逐字精确匹配（不可用 glob 的） ---
+*.unitymeta   text eol=lf

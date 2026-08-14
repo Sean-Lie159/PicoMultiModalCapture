@@ -1,5 +1,10 @@
 # PICO MultiModal Capture — PICO 4 Ultra 同步采集
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Unity](https://img.shields.io/badge/Unity-2022.3%20LTS-black?logo=unity)](https://unity.com/releases/editor/whats-new/2022.3.62)
+[![Platform](https://img.shields.io/badge/Platform-PICO%204%20Ultra-00c3ff)]()
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
+
 Capture four modalities in sync on **PICO 4 Ultra**, exported with **unified timestamps** for offline multi-modal analysis / stereo vision / depth reconstruction / point clouds. The companion offline processing pipeline (LeRobot dataset, SGBM depth & point clouds, skeleton viz, combined video) lives in [`tools/`](tools/README.md).
 
 在 **PICO 4 Ultra** 上同步采集四类数据，以**统一时间戳**导出到设备本地，供离线做多模态分析 / 双目立体 / 深度重建 / 点云。配套的离线处理管线（LeRobot 数据集、SGBM 深度与点云、骨架可视化、合屏视频）见 [`tools/`](tools/README.md)。
