@@ -51,6 +51,29 @@ Desktop.ini
 
 # ---- Logs ----
 *.log
+_*.log
+
+# ---- Python / Offline pipeline (tools/) ----
+# 处理产物（深度/点云/骨架/视频等，体积大且可再生）
+**/output/
+output/
+# 样例原始数据（含个人采集内容，不进仓库）
+**/data.json
+**/data.csv
+**/meta.json
+# Python 虚拟环境
+.venv/
+venv/
+env/
+.python-version
+# Python 调试/临时产物
+_*.png
+_*.mp4
+_*.json
+_*.npy
+_*.pyc
+final_*.png
+x.png
 
 # ---- 其他 ----
 node_modules/

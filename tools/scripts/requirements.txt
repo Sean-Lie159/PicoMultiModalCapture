@@ -1,0 +1,9 @@
+# 数据处理与格式转换管线依赖（Python 3.14 已实测可用）
+numpy>=2.5
+pandas>=3.0
+pyarrow>=25.0
+opencv-python-headless>=5.0
+# 中文文本叠加（06 视频左上角标签）
+Pillow>=10.0
+# 可选：URDF 解析（仅 05_urdf_retarget.py 提供 --urdf 时使用）
+# urdf-parser-py>=0.4
