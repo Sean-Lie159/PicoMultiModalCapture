@@ -4,6 +4,7 @@
 [![Unity](https://img.shields.io/badge/Unity-2022.3%20LTS-black?logo=unity)](https://unity.com/releases/editor/whats-new/2022.3.62)
 [![Platform](https://img.shields.io/badge/Platform-PICO%204%20Ultra-00c3ff)]()
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)](https://www.python.org/)
+[![Release](https://img.shields.io/github/v/release/Sean-Lie159/PicoMultiModalCapture?logo=github)](https://github.com/Sean-Lie159/PicoMultiModalCapture/releases)
 
 Capture four modalities in sync on **PICO 4 Ultra**, exported with **unified timestamps** for offline multi-modal analysis / stereo vision / depth reconstruction / point clouds. The companion offline processing pipeline (LeRobot dataset, SGBM depth & point clouds, skeleton viz, combined video) lives in [`tools/`](tools/README.md).
 
@@ -23,6 +24,18 @@ Capture four modalities in sync on **PICO 4 Ultra**, exported with **unified tim
 - **Hands 26 joints each** (PICO Hand Tracking)
 
 The app runs in MR/Passthrough mode. The recorded video is the real-world view of the for4U dual RGB cameras (not Unity main-camera rendering), stored as a side-by-side (SBS) single-stream MP4. Combined with `meta.json` camera intrinsics/extrinsics/baseline, you can do stereo disparity → depth → point clouds offline (`Z = fx·baseline/disparity`).
+
+### 1.1 Preview / Demo
+
+Skeleton (3D motion-capture) overlaid on the stereo RGB footage — produced by the `tools/` offline pipeline:
+
+<video src="docs/skeleton_preview.mp4" controls="controls" muted="muted" style="max-width: 720px;"></video>
+
+Colored point cloud (stereo SGBM depth → reprojection → PLY):
+
+<p align="center">
+  <img src="docs/pointcloud_preview.png" alt="Point cloud preview" width="640">
+</p>
 
 ### 2. Prerequisites
 
@@ -158,6 +171,18 @@ The companion Python pipeline in [`tools/`](tools/README.md) consumes the export
 - **双手各 26 关键点姿态**（PICO Hand Tracking）
 
 应用运行于 MR/Passthrough 模式。所录视频为 **for4U 双 RGB 相机的真实世界画面**（非 Unity 主相机渲染），左右并排（SBS）单流 MP4，配合 `meta.json` 的相机内参/外参/基线，可离线做 **双目视差 → 深度 → 点云**（`Z = fx·baseline/disparity`）。
+
+### 1.1 演示 / Demo
+
+骨架（3D 动捕）叠加在双目 RGB 画面上的预览（由 `tools/` 离线管线产出）：
+
+<video src="docs/skeleton_preview.mp4" controls="controls" muted="muted" style="max-width: 720px;"></video>
+
+彩色点云（双目 SGBM 深度 → 反投影 → PLY）：
+
+<p align="center">
+  <img src="docs/pointcloud_preview.png" alt="点云预览" width="640">
+</p>
 
 ### 2. 环境要求
 
