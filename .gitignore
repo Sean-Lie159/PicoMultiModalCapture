@@ -38,6 +38,9 @@ Packages/com.picoxr*/
 /tmp_*/
 *.mp4
 *.ply
+# 仓库内故意保留的演示素材（排除上面的 *.mp4 忽略）
+!docs/skeleton_preview.mp4
+!docs/pointcloud_preview.png
 
 # ---- IDE ----
 .vscode/
