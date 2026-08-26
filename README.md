@@ -29,7 +29,9 @@ The app runs in MR/Passthrough mode. The recorded video is the real-world view o
 
 Skeleton (3D motion-capture) overlaid on the stereo RGB footage — produced by the `tools/` offline pipeline:
 
-<video src="docs/skeleton_preview.mp4" controls="controls" muted="muted" style="max-width: 720px;"></video>
+<p align="center">
+  <img src="docs/skeleton_preview.gif" alt="Skeleton overlaid on stereo RGB" width="640">
+</p>
 
 Colored point cloud (stereo SGBM depth → reprojection → PLY):
 
@@ -176,7 +178,9 @@ The companion Python pipeline in [`tools/`](tools/README.md) consumes the export
 
 骨架（3D 动捕）叠加在双目 RGB 画面上的预览（由 `tools/` 离线管线产出）：
 
-<video src="docs/skeleton_preview.mp4" controls="controls" muted="muted" style="max-width: 720px;"></video>
+<p align="center">
+  <img src="docs/skeleton_preview.gif" alt="骨架叠加双目 RGB" width="640">
+</p>
 
 彩色点云（双目 SGBM 深度 → 反投影 → PLY）：
 
